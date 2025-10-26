@@ -529,7 +529,7 @@ p {
     }
 }
 
-/* ENTOURAGE Section */
+/* ENTOURAGE Section - Redesigned like INFO section */
 #Entourage {
     padding: 12rem 0;
     background: transparent;
@@ -537,17 +537,19 @@ p {
 
     #Entourage .all-items {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 3rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
         align-items: stretch;
     }
 
     #Entourage .item {
-        padding: 3rem 2.4rem;
+        padding: 2.5rem 2rem;
         border-radius: 16px;
         background: #ffffff;
         box-shadow: 0 10px 30px rgba(17, 12, 34, 0.06);
         transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        text-align: center;
+        min-height: fit-content;
     }
 
         #Entourage .item:hover {
@@ -555,50 +557,35 @@ p {
             box-shadow: 0 16px 40px rgba(17, 12, 34, 0.10);
             background-color: #fbf9ff;
         }
-        /* Make selected cards span wider */
-        #Entourage .item.wide {
-            grid-column: span 3;
+
+        /* Principal Sponsors - Two separate cards */
+        #Entourage .item.principal-sponsors {
+            grid-column: span 2;
         }
 
-        #Entourage .item.wide {
-            padding: 4rem 3rem;
+        /* All other cards */
+        #Entourage .item.gold {
+            grid-column: span 1;
         }
 
-            #Entourage .item.wide .item-heading {
-                text-align: center;
-                letter-spacing: 0.25em;
-                text-transform: uppercase;
-                font-family: 'Montserrat';
-                font-weight: 900;
-                color: var(--gold);
-            }
-
-                #Entourage .item.wide .item-heading::after {
-                    content: '';
-                    display: block;
-                    width: 180px;
-                    height: 3px;
-                    background: var(--gold);
-                    margin: 0.8rem auto 1.4rem auto;
-                    border-radius: 2px;
-                }
-        /* Gold titles for requested cards */
-        #Entourage .item.gold .item-heading {
+        #Entourage .item-heading {
             text-align: center;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             font-family: 'Montserrat';
             font-weight: 900;
             color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 2rem;
         }
 
-            #Entourage .item.gold .item-heading::after {
+            #Entourage .item-heading::after {
                 content: '';
                 display: block;
-                width: 160px;
+                width: 120px;
                 height: 3px;
                 background: var(--gold);
-                margin: 0.6rem auto 1.2rem auto;
+                margin: 0.8rem auto 1.4rem auto;
                 border-radius: 2px;
             }
     /* Gold subtitles (group titles) */
@@ -628,10 +615,12 @@ p {
         color: var(--secondary-gray);
         line-height: 1.75;
     }
-    /* Entourage list styles */
+    /* Principal Sponsors - Two columns side by side */
     #Entourage .entourage-list {
-        display: block;
-        margin-top: 0.5rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 1rem;
         text-align: center;
     }
 
@@ -639,29 +628,25 @@ p {
             list-style: none;
             padding: 0;
             margin: 0;
-            display: inline;
+            text-align: center;
         }
 
         #Entourage .entourage-list li {
-            display: inline;
+            display: block;
             font-size: 1.6rem;
-            line-height: 2;
+            line-height: 2.2;
             color: var(--secondary-black);
+            margin-bottom: 0.5rem;
+            padding: 0.3rem 0;
         }
 
-            #Entourage .entourage-list li + li:before {
-                content: "";
-            }
 
-            #Entourage .entourage-list li + li {
-                margin-left: 0.6rem;
-            }
-
-
-    /* Assist our needs grid */
+    /* Assist our needs grid - Two columns */
     #Entourage .entourage-grid.assist {
-        display: block;
-        margin-top: 0.5rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 1rem;
         text-align: center;
     }
 
@@ -670,8 +655,9 @@ p {
             font-size: 1.4rem;
             letter-spacing: 0.08em;
             color: var(--gold);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.8rem;
             text-transform: uppercase;
+            font-weight: 700;
         }
 
     #Entourage .names {
@@ -682,52 +668,66 @@ p {
     }
 
         #Entourage .names li {
-            display: inline;
+            display: block;
             font-size: 1.5rem;
-            line-height: 1.8;
+            line-height: 2;
             color: var(--secondary-gray);
+            margin-bottom: 0.3rem;
+            padding: 0.2rem 0;
         }
-
-            #Entourage .names li + li:before {
-                content: "";
-            }
-
-            #Entourage .names li + li {
-                margin-left: 0.6rem;
-            }
-    /* Override for wide Principal Sponsors formatting like reference (two columns) */
-    #Entourage .item.wide .entourage-list {
+    /* Secondary sponsors layout - Single column */
+    #Entourage .entourage-grid.secondary {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem 3rem;
-        text-align: center;
-        justify-content: center;
-    }
-
-        #Entourage .item.wide .entourage-list ul {
-            display: block;
-        }
-
-        #Entourage .item.wide .entourage-list li {
-            display: block;
-            line-height: 1.9;
-            font-size: 1.6rem;
-        }
-    /* Override for wide Assist section (two columns groups, each name per line) */
-    #Entourage .item.wide .entourage-grid.assist {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem 3rem;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 1rem;
         text-align: center;
     }
 
-        #Entourage .item.wide .entourage-grid.assist .names {
-            text-align: center;
+        #Entourage .entourage-grid.secondary .group-title {
+            font-family: 'Montserrat';
+            font-size: 1.3rem;
+            letter-spacing: 0.08em;
+            color: var(--gold);
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            font-weight: 700;
         }
 
-            #Entourage .item.wide .entourage-grid.assist .names li {
-                display: block;
-            }
+    /* Bearers layout - Single column */
+    #Entourage .entourage-grid.bearers {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+        #Entourage .entourage-grid.bearers .group-title {
+            font-family: 'Montserrat';
+            font-size: 1.3rem;
+            letter-spacing: 0.08em;
+            color: var(--gold);
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+    /* Single entourage item */
+    #Entourage .entourage-single {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+        #Entourage .entourage-single .group-title {
+            font-family: 'Montserrat';
+            font-size: 1.3rem;
+            letter-spacing: 0.08em;
+            color: var(--gold);
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
 
 /* Enhanced Entourage Mobile Responsiveness */
 @media only screen and (max-width: 768px) {
@@ -743,65 +743,57 @@ p {
     #Entourage .all-items {
         grid-template-columns: 1fr;
         gap: 2.5rem;
-        text-align: center;
+        padding: 0 1rem;
     }
 
     #Entourage .item {
         padding: 2.5rem 2rem;
-        margin: 0 1rem;
+        margin: 0;
     }
 
-    #Entourage .item.wide {
-        padding: 3rem 2rem;
-        margin: 0 1rem;
+    #Entourage .item-heading {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
     }
 
-    #Entourage .item.wide .item-heading {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-    }
-
-    #Entourage .item.wide .entourage-list {
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-    }
-
-    #Entourage .item.wide .entourage-list ul {
-        text-align: center;
-    }
-
-    #Entourage .item.wide .entourage-list li {
-        font-size: 1.5rem;
-        line-height: 2.2;
-        margin-bottom: 0.5rem;
-    }
-
-    #Entourage .item.wide .entourage-grid.assist {
+    /* Principal Sponsors - Single column on mobile */
+    #Entourage .entourage-list {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
+    }
+
+    #Entourage .entourage-list li {
+        font-size: 1.5rem;
+        line-height: 2;
+    }
+
+    /* Assist section - Single column on mobile */
+    #Entourage .entourage-grid.assist {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     #Entourage .entourage-grid.assist .group-title {
         font-size: 1.3rem;
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.6rem;
     }
 
     #Entourage .names li {
         font-size: 1.4rem;
-        line-height: 2;
-        margin-bottom: 0.3rem;
+        line-height: 1.8;
     }
 
-    #Entourage .entourage-grid.secondary {
-        gap: 1.5rem;
-    }
-
+    /* Secondary and Bearers - Single column */
+    #Entourage .entourage-grid.secondary,
     #Entourage .entourage-grid.bearers {
-        gap: 1.5rem;
+        gap: 1.2rem;
     }
 
-    #Entourage .entourage-single {
-        text-align: center;
+    #Entourage .entourage-grid.secondary .group-title,
+    #Entourage .entourage-grid.bearers .group-title,
+    #Entourage .entourage-single .group-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
     }
 }
 
