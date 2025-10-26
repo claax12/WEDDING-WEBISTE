@@ -20,13 +20,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Mobile navigation toggle
+    // Enhanced Mobile navigation toggle
     const navToggle = document.getElementById('navToggle');
     const header = document.getElementById('header');
     
     if (navToggle && header) {
         navToggle.addEventListener('click', function() {
             header.classList.toggle('open');
+            navToggle.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (header.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         });
     }
 
@@ -35,7 +43,20 @@ document.addEventListener('DOMContentLoaded', function() {
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
             header.classList.remove('open');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
         });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (header.classList.contains('open') && 
+            !header.contains(event.target) && 
+            !navToggle.contains(event.target)) {
+            header.classList.remove('open');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     });
 
     // Header scroll effect
@@ -258,3 +279,4 @@ const additionalStyles = `
 
 // Add the styles to the document
 document.head.insertAdjacentHTML('beforeend', additionalStyles);
+
